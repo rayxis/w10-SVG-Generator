@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 const SVG      = require('./lib/svg');
 
 // Import shapes
-const {Circle, Rectangle, Text, Triangle} = require('./lib/shapes');
+const {Circle, Rectangle, Square, Text, Triangle} = require('./lib/shapes');
 
 const prompts = {
 	colorFill:   {
