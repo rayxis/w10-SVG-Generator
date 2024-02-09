@@ -43,7 +43,6 @@ Once inside the application, you'll be greeted with a menu with the options to a
 - Triangle
 - Text
 
-
 Each option will provide you with several questions to build the attributes for your image, some of them are unique, 
 while others are shared. For example: for each item, you'll be asked for the x and y coordinates and a color fill; but 
 with `Circle`, you'll also be asked for the radius; for `Square`, `Rectangle`, and `Triangle` you'll be asked for 
@@ -66,6 +65,10 @@ able to push them out just yet. In future a version, I would like to add:
 - Rotation on more than triangles
 - Better font selection
 - and ability to edit. 
+
+Each shape gets a randomly generated ID, which can be used for CSS purposes. This is mostly reserved for future 
+purposes, so I left the code in. It generates a random 3-letter code, which should be enough to prevent a 
+collision between IDs.
 
 ## User Story
 ```
