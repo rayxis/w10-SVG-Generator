@@ -124,7 +124,7 @@ async function promptUser(promptList) {
 			case 'Square':
 				questions  = ['width', 'posX', 'posY', 'colorFill'];
 				questions.height = questions.width;
-				shapeClass = Rectangle;
+				shapeClass = Square;
 				break;
 			case 'Rectangle':
 				questions  = ['width', 'height', 'posX', 'posY', 'colorFill'];
