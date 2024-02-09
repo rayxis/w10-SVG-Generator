@@ -2,11 +2,29 @@
 
 ## Description
 
-This is an SVG Generator that operates on the command line and outputs an SVG file based off of user-defined criteria.
+This is a simple-to-use command line tool that has been developed to produce Scalable Vector Graphics (SVG) files 
+for logos. Users have the ability to provide their own criteria, which impacts the final generated file.
+
+The criteria include different options, such as the SVG's dimensions, color schemes, shapes, and other attributes 
+related to specific SVG elements. The user enters this information into the prompted questions, the information is 
+processed, and an SVG file is created that aligns with the input that the user provided.
+
+This is a simpler approach than using a more robust (and complicated) SVG editor, such as Inkscape for a quicker 
+process. Should the user decide to afterward, they are able to directly edit the file to further fine-tune the 
+results that they would like.
 
 ## Installation
 
-For installation, copy the files to your location of choice and execute: 
+For installation, you will want to make sure that you have node installed on your machine, and that you are 
+comfortable using the command line.
+
+Open up your terminal, and navigate to the directory that you chose to place this application. You can then proceed 
+by typing:
+
+```shell
+npm i
+```
+This will install the necessary components for proper operation.
 
 ## Usage
 
