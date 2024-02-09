@@ -2,7 +2,7 @@
 
 ## Description
 
-
+This is an SVG Generator that operates on the command line and outputs an SVG file based off of user-defined criteria.
 
 ## Installation
 
@@ -10,13 +10,30 @@ For installation, copy the files to your location of choice and execute:
 
 ## Usage
 
-In
-
 ### Execution
+
+To get started, on your terminal type:
 
 ```shell
 node svggen.js
 ```
+
+Once inside the application, you'll be greeted with a menu with the options to add various elements to your SVG file:
+- Circle
+- Rectangle
+- Square
+- Triangle
+- Text
+
+
+Each option will provide you with several questions to build the attributes for your image, some of them are unique, 
+while others are shared. For example: for each item, you'll be asked for the x and y coordinates and a color fill; but 
+with `Circle`, you'll also be asked for the radius; for `Square`, `Rectangle`, and `Triangle` you'll be asked for 
+the width and height; and for `Text`, you'll naturally be asked for the text content, the font family, and the font 
+size.
+
+Once you are done, select `Done` from the menu. You will then be prompted for a location to save your file. In the 
+demonstration video below, I chose `./examples/logo-test1.svg`.
 
 ### Demonstration
 

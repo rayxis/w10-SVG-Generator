@@ -6,7 +6,23 @@ const SVG      = require('./lib/svg');
 // Import shapes
 const {Circle, Rectangle, Square, Text, Triangle} = require('./lib/shapes');
 
-const prompts = {
+// Validate functions
+checkValidation = {
+	// Check if entry is a number.
+	number: (value) => {
+		if (value.endsWith('%')) value = value.slice(0, -1);
+		return (!isNaN(+value)) || 'Please enter numbers only.';
+	},
+	// Check if entry is a percentage or number.
+	percent: (value) => {
+		if (value.endsWith('%')) value = value.slice(0, -1);
+		return (!isNaN(+value)) || 'Please enter numbers or percentages only.';
+	},
+	// Check text length.
+	textLength: (value) => (value.length <= 3) || 'Please enter up to 3 characters.'
+};
+// User Prompts
+const prompts   = {
 	colorFill:   {
 		type:    'input',
 		name:    'fill',
@@ -16,9 +32,7 @@ const prompts = {
 		type:     'input',
 		name:     'content',
 		message:  'Logo text (3 Characters): ',
-		validate: (value) => {
-			return (value.length <= 3) || 'Please enter up to 3 characters.';
-		}
+		validate: checkValidation.textLength
 	},
 	fileName:    {
 		type:    'input',
@@ -38,52 +52,37 @@ const prompts = {
 		name:     'fontSize',
 		message:  'Font Size: ',
 		default:  64,
-		validate: (value) => {
-			return (!isNaN(+value)) || 'Please enter numbers only.';
-		}
+		validate: checkValidation.number
 	},
 	height:      {
 		type:     'input',
 		name:     'height',
 		message:  'Height: ',
-		validate: (value) => {
-			if (value.endsWith('%')) value = value.slice(0, -1);
-			return (!isNaN(+value)) || 'Please enter numbers or percentages only.';
-		}
+		validate: checkValidation.percent
 	},
 	posX:        {
 		type:     'input',
 		name:     'x',
 		message:  'Position (x-axis): ',
-		validate: (value) => {
-			if (value.endsWith('%')) value = value.slice(0, -1);
-			return (!isNaN(+value)) || 'Please enter numbers or percentages only.';
-		}
+		validate: checkValidation.percent
 	},
 	posY:        {
 		type:     'input',
 		name:     'y',
 		message:  'Position (y-axis): ',
-		validate: (value) => {
-			if (value.endsWith('%')) value = value.slice(0, -1);
-			return (!isNaN(+value)) || 'Please enter numbers or percentages only.';
-		}
+		validate: checkValidation.percent
 	},
 	radius:      {
 		type:     'input',
 		name:     'radius',
 		message:  'Radius: ',
-		validate: (value) => {
-			return (!isNaN(+value)) || 'Please enter numbers only.';
-		}
+		validate: checkValidation.number
 	},
 	rotate:      {
 		type:     'input',
 		name:     'rotate',
 		message:  'Rotate (degrees): ',
-		validate: (value) => {
-			return (!isNaN(+value)) || 'Please enter numbers only.';
-		}
+		validate: checkValidation.number
 	},
 	shapes:      {
 		type:    'list',
@@ -95,25 +94,24 @@ const prompts = {
 		type:     'input',
 		name:     'width',
 		message:  'Width: ',
-		validate: (value) => {
-			if (value.endsWith('%')) value = value.slice(0, -1);
-			return (!isNaN(+value)) || 'Please enter numbers or percentages only.';
-		}
+		validate: checkValidation.percent
 	}
 };
 
+// Prompt the user with questions
 async function promptUser(promptList) {
 	// Return results
 	return await inquirer.prompt(promptList.map(prompt => prompts[prompt]));
 }
 
+// Self-executing function to build questions, and render out a file
 (async () => {
 	let svg = new SVG(300, 200);
 	let shapeType;
 
 	do {
 		let questions = [];
-		let shape, shapeClass;
+		let shapeClass;
 		shapeType     = await promptUser(['shapes']);
 
 		switch (shapeType.shapes) {
@@ -122,9 +120,8 @@ async function promptUser(promptList) {
 				shapeClass = Circle;
 				break;
 			case 'Square':
-				questions  = ['width', 'posX', 'posY', 'colorFill'];
-				questions.height = questions.width;
-				shapeClass = Square;
+				questions        = ['width', 'posX', 'posY', 'colorFill'];
+				shapeClass       = Square;
 				break;
 			case 'Rectangle':
 				questions  = ['width', 'height', 'posX', 'posY', 'colorFill'];
@@ -143,10 +140,10 @@ async function promptUser(promptList) {
 			default:
 		}
 
-		const response = await promptUser(questions);
-		shape = new shapeClass(svg, response);
+		// Ask user questions, and create a new object from the responses.
+		new shapeClass(svg, await promptUser(questions));
 
-	} while (shapeType.shapes !== 'Done');
+	} while (shapeType.shapes !== 'Done'); // Loop until user is Done.
 
 	// If the user is done, save the file.
 	promptUser(['fileName']).then(response => svg.renderToFile(response.fileName));
