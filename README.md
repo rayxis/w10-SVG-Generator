@@ -1,20 +1,36 @@
-# w10-SVG-Generator
-An SVG Generator
+# SVG Generator
 
 ## Description
 
 
+
 ## Installation
 
+For installation, copy the files to your location of choice and execute: 
 
 ## Usage
 
+In
 
 ### Execution
 
+```shell
+node svggen.js
+```
 
 ### Demonstration
 
+A link to a video demonstration for this can be found here: https://youtu.be/5vsBOoUux5g
+
+### Future Plans
+
+There are several ideas that I was entertaining for this project. Unfortunately, due to time constraints, I wasn't 
+able to push them out just yet. In future a version, I would like to add:
+- CSS
+- Shading
+- Rotation on more than triangles
+- Better font selection
+- and ability to edit. 
 
 ## User Story
 ```
